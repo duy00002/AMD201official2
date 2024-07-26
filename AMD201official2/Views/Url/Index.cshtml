@@ -1,15 +1,46 @@
-﻿@model List<Url>;
-
-@{
-    var currentDateTime = DateTime.UtcNow;
+﻿@{
+	ViewData["Title"] = "All short links";
 }
 
-<h3>Welcome to the URL shortener Example!</h3>
+<div class="container">
+	<a class="btn btn-outline-success"
+	   asp-controller="Home"
+	   asp-action="Index">
+	   Add new
+	   
+	</a>
+</div>
 
-<p>@currentDateTime</p>
+<div class="container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+			   <th scope="col">#</th>
+			   <th scope="col">Oringinal link</th>
+		       <th scope="col">Shortened link</th>
+			   <th scope="col">Options</th>
+			   <th scope="col">Options2</th>
+			</tr>
+		
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>https://original.com</td>
+				<td>ertr</td>
+				<td>
+					<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Copy">
+						Copy
+					</a>
+				</td>
+				<td>
+					<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">
+						Remove
+					</a>
+				</td>
+				
 
-
-@foreach(var link in Model)
-{
-    <p>Original link: @link.OriginalLink</p>
-}
+			</tr>
+		</tbody>
+	</table>
+</div>
