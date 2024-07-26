@@ -1,6 +1,80 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Retrieve link";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<section class=" ="landing py-5>
+<div class="container">
+	<div class="row align-items-center">
+
+		<div class="col-lg-4">
+			<img scr="" class="img-fluid" alt="" />
+		</div>
+
+		<div class="col-12">
+			<h1 class="display-4">SHORTLY Retrieving service </h1>
+			<p class=" lead">
+				Receiving your original link here !
+			</p>
+		</div>
+	</div>
+</div>
+</section>
+
+<section class="features" id=" features">
+	<div class="container">
+		<div class="url-shorten-feature">
+			<!-- Update action-->
+			<form class="url-shorten-feature" id="url-shorten-feature" action="/Home/ShortenAction" method="post">
+				<div>
+					<input type="text" class="url-input" name="urlToShorten" placeholder="Shorten your link here !"
+					<span class="alert"></span>
+				</div>
+				<button type="submit" class="btn btn-lg" style=""> Get your original link !</button>
+			</form>
+			<div class="url-shorten-results"></div>
+		</div>
+	</div>
+
+</section>
+<br />
+<br />
+
+
+
+
+
+
+<div class="container">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Shortened link</th>
+				<th scope="col">Oringinal link</th>
+				<th scope="col">Options</th>
+				<th scope="col">Options2</th>
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>ertr</td>
+				<td>https://original.com</td>
+				<td>
+					<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Copy">
+						Copy
+					</a>
+				</td>
+				<td>
+					<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">
+						Remove
+					</a>
+				</td>
+
+
+			</tr>
+		</tbody>
+	</table>
+</div>
