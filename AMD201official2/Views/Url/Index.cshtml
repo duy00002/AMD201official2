@@ -1,0 +1,15 @@
+﻿@model List<Url>;
+
+@{
+    var currentDateTime = DateTime.UtcNow;
+}
+
+<h3>Welcome to the URL shortener Example!</h3>
+
+<p>@currentDateTime</p>
+
+
+@foreach(var link in Model)
+{
+    <p>Original link: @link.OriginalLink</p>
+}
