@@ -1,3 +1,4 @@
+using AMD201official2.Data.Models;
 using AMD201official2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -6,9 +7,11 @@ namespace AMD201official2.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+		
+		private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+
+		public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
@@ -18,12 +21,12 @@ namespace AMD201official2.Controllers
             return View();
         }
 
-        public IActionResult ShortenAction()
-        {
-            return RedirectToAction("Index");
-        }
+		public IActionResult ShortenAction()
+		{
+			return RedirectToAction("Index");
+		}
 
-        public IActionResult Privacy()
+		public IActionResult Privacy()
         {
             return View();
         }
