@@ -1,0 +1,33 @@
+﻿@model Url
+@{
+	ViewData["Title"] = "ShortenURL";
+}
+
+<h1>Create</h1>
+
+<h4>UrlShorten</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <!-- Note: remember to include enctype attribute in form declaration to upload image -->
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="OriginalLink" class="control-label">Your Link</label>
+                <input asp-for="OriginalLink" class="form-control" />
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,4 +1,5 @@
-﻿namespace AMD201official2.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace AMD201official2.Models
 {
 	public class Url
 	{
