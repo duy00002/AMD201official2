@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Retrieve link";
+﻿@model List<Url>;
+@{
+	ViewData["Title"] = "Retrieve Link";
+	var allUrls = ViewData["AllUrls"] as List<Url>;
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -58,23 +60,33 @@
 
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td>ertr</td>
-				<td>https://original.com</td>
-				<td>
-					<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Copy">
-						Copy
-					</a>
-				</td>
-				<td>
-					<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">
-						Remove
-					</a>
-				</td>
+			@{
+				if (allUrls != null)
+				{
+					foreach (var url in allUrls)
+					{
+						<tr>
+							<td>@url.Id</td>
+							<td>@url.OriginalLink</td>
+							<td>@url.ShortLink</td>
+							<td>
+								<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Copy"
+								   asp-route-id="@url.Id">
+									Copy
+								</a>
+							</td>
+							<td>
+								<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove"
+								   asp-route-id="@url.Id">
+									Remove
+								</a>
+							</td>
+						</tr>
+					}
+				}
+			}
 
 
-			</tr>
 		</tbody>
 	</table>
 </div>

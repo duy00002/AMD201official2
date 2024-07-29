@@ -14,63 +14,62 @@ using AMD201official2.Interfaces;
 
 namespace AMD201official2.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("[controller]")]
 	[ApiController]
 	public class UrlController : Controller
 	{
-		private readonly IUrlRepository _urlRepository;
-		private readonly IMapper _mapper;
+		//private readonly IUrlRepository _urlRepository;
+		//private readonly IMapper _mapper;
 
-		public UrlController(IUrlRepository urlRepository, IMapper mapper)
-		{
-			_urlRepository = urlRepository;
-			_mapper = mapper;
-		}
+		//public UrlController(IUrlRepository urlRepository, IMapper mapper)
+		//{
+		//	_urlRepository = urlRepository;
+		//	_mapper = mapper;
+		//}
 
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<UrlDto>>> GetUrls()
-		{
-			var urls = await _urlRepository.GetAllUrls();
-			return _mapper.Map<List<UrlDto>>(urls);
-		}
+		//[HttpGet]
+		//public async Task<ActionResult<IEnumerable<UrlDto>>> GetUrls()
+		//{
+		//	var urls = await _urlRepository.GetAllUrls();
+		//	return _mapper.Map<List<UrlDto>>(urls);
+		//}
 
-		[HttpGet("{id}")]
-		public async Task<ActionResult<UrlDto>> GetUrl(int id)
-		{
-			var url = await _urlRepository.GetUrlById(id);
+		//[HttpGet("{id}")]
+		//public async Task<ActionResult<UrlDto>> GetUrl(int id)
+		//{
+		//	var url = await _urlRepository.GetUrlById(id);
 
-			if (url == null) { return NotFound(); }
-			return _mapper.Map<UrlDto>(url);
-		}
+		//	if (url == null) { return NotFound(); }
+		//	return _mapper.Map<UrlDto>(url);
+		//}
 
-		[HttpPost]
-		public async Task<ActionResult<UrlDto>> PostUrl (UrlDto urlDto)
-		{
-			var url = _mapper.Map<Url>(urlDto);
-			var addedUrl = await _urlRepository.AddUrl(url);
+		//[HttpPost]
+		//public async Task<ActionResult<UrlDto>> PostUrl (UrlDto urlDto)
+		//{
+		//	var url = _mapper.Map<Url>(urlDto);
+		//	var addedUrl = await _urlRepository.AddUrl(url);
 
-			return CreatedAtAction(nameof(GetUrl), new { id = addedUrl.Id }, _mapper.Map<UrlDto>(addedUrl));
-		}
+		//	return CreatedAtAction(nameof(GetUrl), new { id = addedUrl.Id }, _mapper.Map<UrlDto>(addedUrl));
+		//}
 
-		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteUrl (int id)
-		{
-			var url = await _urlRepository.GetUrlById(id);
+		//[HttpDelete("{id}")]
+		//public async Task<IActionResult> DeleteUrl (int id)
+		//{
+		//	var url = await _urlRepository.GetUrlById(id);
 
-			if (url == null) { return NotFound(); }
+		//	if (url == null) { return NotFound(); }
 
-			var deleted = await _urlRepository.DeleteUrl(id);
-			if (deleted)
-			{
-				return NoContent();
-			}
-			else
-			{
-				return StatusCode(500);
-			}
-		}
+		//	var deleted = await _urlRepository.DeleteUrl(id);
+		//	if (deleted)
+		//	{
+		//		return NoContent();
+		//	}
+		//	else
+		//	{
+		//		return StatusCode(500);
+		//	}
+		//}
 
-		[NonAction]
 		public IActionResult Index()
 		{
 			//Data is from DB
@@ -117,16 +116,16 @@ namespace AMD201official2.Controllers
 			return View();
 		}
 
-		[NonAction]
-		public IActionResult Copy(int id)
-		{
-			return View();
-		}
 
-		[NonAction]
-		public IActionResult Remove(int id)
-		{
-			return View();
-		}
+		//public IActionResult Copy(int id)
+		//{
+		//	return View();
+		//}
+
+
+		//public IActionResult Remove(int id)
+		//{
+		//	return View();
+		//}
 	}
 }
