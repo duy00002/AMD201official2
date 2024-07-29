@@ -40,11 +40,12 @@ namespace AMD201official2.Controllers
 
 		public IActionResult Create()
 		{
+			ViewData["ShortenedUrl"] = RandomString(8);
 			return View();
 		}
+
 		//Post: Url/Create
 		[HttpPost]
-		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create([Bind("Id,OriginalLink,ShortLink")] Url url)
 		{
 			if (ModelState.IsValid)
@@ -53,7 +54,7 @@ namespace AMD201official2.Controllers
 				await _context.SaveChangesAsync();
 				return RedirectToAction(nameof(Index));
 			}
-			return View(url);
+			return View();
 		}
 
         // Get: Url/Remove/5
@@ -76,7 +77,6 @@ namespace AMD201official2.Controllers
 
 		// Post: Url/Remove/5
 		[HttpPost, ActionName("Delete")]
-		[ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirm(int id)
         {
             var url = await _context.Urls.FindAsync(id);
@@ -98,19 +98,10 @@ namespace AMD201official2.Controllers
 		private static Random random = new Random();
 		public static string RandomString(int length)
 		{
-			const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			const string chars = "qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 			return new string(Enumerable.Repeat(chars, length)
 				.Select(s => s[random.Next(s.Length)]).ToArray());
 		}
-		//public IActionResult Copy(int id)
-		//{
-		//	return View();
-		//}
 
-
-		//public IActionResult Remove(int id)
-		//{
-		//	return View();
-		//}
 	}
 }
