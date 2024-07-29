@@ -46,7 +46,8 @@ namespace AMD201official2.Controllers
 
 		//Post: Url/Create
 		[HttpPost]
-		public async Task<IActionResult> Create([Bind("Id,OriginalLink,ShortLink")] Url url)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,OriginalLink,ShortLink")] Url url)
 		{
 			if (ModelState.IsValid)
 			{
@@ -58,7 +59,7 @@ namespace AMD201official2.Controllers
 		}
 
         // Get: Url/Remove/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Remove(int? id)
         {
             if (id == null)
             {
@@ -77,7 +78,8 @@ namespace AMD201official2.Controllers
 
 		// Post: Url/Remove/5
 		[HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> RemoveConfirm(int id)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveConfirmed(int id)
         {
             var url = await _context.Urls.FindAsync(id);
             if (url != null)

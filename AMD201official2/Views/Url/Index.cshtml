@@ -30,7 +30,10 @@
 					<tr>
 						<td>@Html.DisplayFor(modelItem => url.Id)</td>
 						<td>@Html.DisplayFor(modelItem => url.OriginalLink)</td>
-						<td>@Html.DisplayFor(modelItem => url.ShortLink)</td>
+						<td>
+							<a href="@url.OriginalLink" class="btn btn-primary">
+								@Html.DisplayFor(modelItem => url.ShortLink)
+							</a>
 						<td>
 							<a class="btn btn-outline-success" asp-controller="Url" asp-action="Copy"
 								asp-route-id="@url.Id">
