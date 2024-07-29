@@ -7,6 +7,7 @@ using System.Reflection;
 using AMD201official2.Interfaces;
 using AMD201official2.Repositories;
 using Microsoft.Extensions.Configuration;
+using AMD201official2.Models;
 namespace AMD201official2
 {
     public class Program
@@ -14,34 +15,39 @@ namespace AMD201official2
 
         public static void Main(string[] args)
         {
-            //Add database context and use SQL Server LocalDB
-            var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            builder.Services.AddControllers();
+			var builder = WebApplication.CreateBuilder(args);
 
-            //Add Repositories and Dependency Injection
-            builder.Services.AddScoped<IUrlRepository, UrlRepository>();
+			//Add database context and use SQL Server LocalDB
+			builder.Services.AddDbContext<AppDbContext>(
+				options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+			);
 
-            //Add AutoMapper
-            builder.Services.AddAutoMapper(typeof(Program));
-
-            // Add Swagger docs
-            builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Name", Version = "v1", Description = "Your API Description", }); });
-            builder.Services.AddControllers();
-
-			// Configure rate limiting options
-			builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
-			builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
-			builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-			// Add rate limiting middleware
-			builder.Services.AddMemoryCache(); // Add the IMemoryCache service here
-			builder.Services.AddInMemoryRateLimiting();
-			builder.Services.AddHttpContextAccessor();
-			builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+			builder.Services.AddRazorPages();
 			builder.Services.AddControllers();
 
+			//         //Add Repositories and Dependency Injection
+			//         builder.Services.AddScoped<IUrlRepository, UrlRepository>();
 
-			// Add services to the container.
+			//         //Add AutoMapper
+			//         builder.Services.AddAutoMapper(typeof(Program));
+
+			//         // Add Swagger docs
+			//         builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Name", Version = "v1", Description = "Your API Description", }); });
+			//         builder.Services.AddControllers();
+
+			//// Configure rate limiting options
+			//builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+			//builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+			//builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+			//// Add rate limiting middleware
+			//builder.Services.AddMemoryCache(); // Add the IMemoryCache service here
+			//builder.Services.AddInMemoryRateLimiting();
+			//builder.Services.AddHttpContextAccessor();
+			//builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+			//builder.Services.AddControllers();
+
+
+			//Add services to the container.
 			builder.Services.AddControllersWithViews();
 
 			var app = builder.Build();
@@ -53,17 +59,17 @@ namespace AMD201official2
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseIpRateLimiting();
+   //         app.UseIpRateLimiting();
 
-            app.UseSwagger();
-			app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name V1"); });
+   //         app.UseSwagger();
+			//app.UseSwaggerUI(c => {c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API Name V1"); });
 
-			app.UseHttpsRedirection();
-            app.UseStaticFiles();
+			//app.UseHttpsRedirection();
+   //         app.UseStaticFiles();
 
-            app.UseRouting();
+   //         app.UseRouting();
 
-            app.UseAuthorization();
+   //         app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",

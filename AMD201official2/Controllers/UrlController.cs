@@ -1,4 +1,4 @@
-﻿using AMD201official2.Data.Models;
+﻿using AMD201official2.Models;
 using AMD201official2.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +14,8 @@ using AMD201official2.Interfaces;
 
 namespace AMD201official2.Controllers
 {
-	[Route("[controller]")]
-	[ApiController]
+	//[Route("[controller]")]
+	//[ApiController]
 	public class UrlController : Controller
 	{
 		//private readonly IUrlRepository _urlRepository;
@@ -72,6 +72,8 @@ namespace AMD201official2.Controllers
 
 		public IActionResult Index()
 		{
+
+
 			//Data is from DB
 			var url1 = new Url()
 			{
