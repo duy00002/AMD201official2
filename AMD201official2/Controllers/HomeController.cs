@@ -21,11 +21,6 @@ namespace AMD201official2.Controllers
             return View();
         }
 
-		public IActionResult ShortenAction()
-		{
-			return RedirectToAction("Index");
-		}
-
 		public IActionResult Privacy()
         {
             return View();
