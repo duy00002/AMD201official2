@@ -1,0 +1,23 @@
+﻿@model Url
+
+@{
+    ViewData["Title"] = "Expand URL";
+}
+
+<h2>Expand URL</h2>
+
+<form method="get">
+    <div class="form-group">
+        <label for="ShortLink">Enter Shortened URL:</label>
+        <input type="text" class="form-control" id="shortLink" name="shortLink" />
+    </div>
+    <button type="submit" class="btn btn-primary">Expand</button>
+</form>
+
+@if (Model != null)
+{
+    <div class="mt-3">
+        <h3>Original URL:</h3>
+        <p>@Model.OriginalLink</p>
+    </div>
+}

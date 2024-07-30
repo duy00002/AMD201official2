@@ -139,5 +139,28 @@ namespace AMD201official2.Controllers
 				.Select(s => s[random.Next(s.Length)]).ToArray());
 		}
 
-	}
+        //Get: Url/Expand
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Expand(string ShortLink)
+        {
+            if (string.IsNullOrEmpty(ShortLink))
+            {
+                ModelState.AddModelError("", "Short link is required.");
+                return View();
+            }
+
+            var url = await _context.Urls.FirstOrDefaultAsync(url => url.ShortLink == ShortLink);
+
+            if (url == null)
+            {
+                ModelState.AddModelError("", "Shortened URL not found.");
+                return View();
+            }
+
+            // Display the original URL in the view
+            return View(url);
+        }
+
+    }
 }
