@@ -34,11 +34,11 @@
 							<a href="@url.OriginalLink" class="btn btn-primary">
 								@Html.DisplayFor(modelItem => url.ShortLink)
 							</a>
+							
 						<td>
-							<a class="btn btn-outline-success" asp-controller="Url" asp-action="Copy"
-								asp-route-id="@url.Id">
+							<button onclick="copyLink(@url.Id)" class="btn btn-primary" value="localhost:7260/Url/IDI/@url.ShortLink" id="@url.Id">
 								Copy
-							</a>
+							</button>
 						</td>
 						<td>
 							<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove"
@@ -52,3 +52,16 @@
 		</tbody>
 	</table>
 </div>
+
+
+<script type="text/javascript">
+
+	function copyLink(id)
+	{
+		var copyText = document.getElementById(id);
+
+		navigator.clipboard.writeText(copyText.value);
+
+		alert("Copied the link: " + copyText.value);
+	}
+</script>

@@ -76,8 +76,9 @@ namespace AMD201official2.Controllers
             return View(url);
         }
 
-		// Post: Url/Remove/5
-		[HttpPost, ActionName("Delete")]
+
+        // Post: Url/Remove/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveConfirmed(int id)
         {
@@ -89,6 +90,38 @@ namespace AMD201official2.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        // Get: Url/IDI/'short-link'
+        public async Task<IActionResult> IDI(string? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var url = await _context.Urls
+                .FirstOrDefaultAsync(url => url.ShortLink == id);
+            if (url == null)
+            {
+                return NotFound();
+            }
+            return Redirect(url.OriginalLink);
+            //return View(url);
+        }
+
+		// Post: Url/IDI/'short-link' Remain Unused
+		[HttpPost, ActionName("IDI")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IDIConfirmed(string id)
+        {
+            var url = await _context.Urls
+                .FirstOrDefaultAsync(url => url.ShortLink == id);
+            if (url == null)
+            {
+                return NotFound();
+            }
+            return Redirect(url.OriginalLink);
         }
 
         private bool UrlExists(int id)
