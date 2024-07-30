@@ -38,6 +38,7 @@ namespace AMD201official2.Controllers
 			return View(url);
 		}
 
+        // hi
 		public IActionResult Create()
 		{
 			ViewData["ShortenedUrl"] = RandomString(8);
