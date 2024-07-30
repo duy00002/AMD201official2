@@ -1,4 +1,4 @@
-﻿using AMD201official2.Data.Models;
+﻿using AMD201official2.Models;
 using AMD201official2.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,125 +7,103 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using AutoMapper;
-
 using System.Runtime.CompilerServices;
-using AMD201official2.Interfaces;
+
 
 namespace AMD201official2.Controllers
 {
-	[Route("[controller]")]
-	[ApiController]
+
 	public class UrlController : Controller
 	{
-		//private readonly IUrlRepository _urlRepository;
-		//private readonly IMapper _mapper;
-
-		//public UrlController(IUrlRepository urlRepository, IMapper mapper)
-		//{
-		//	_urlRepository = urlRepository;
-		//	_mapper = mapper;
-		//}
-
-		//[HttpGet]
-		//public async Task<ActionResult<IEnumerable<UrlDto>>> GetUrls()
-		//{
-		//	var urls = await _urlRepository.GetAllUrls();
-		//	return _mapper.Map<List<UrlDto>>(urls);
-		//}
-
-		//[HttpGet("{id}")]
-		//public async Task<ActionResult<UrlDto>> GetUrl(int id)
-		//{
-		//	var url = await _urlRepository.GetUrlById(id);
-
-		//	if (url == null) { return NotFound(); }
-		//	return _mapper.Map<UrlDto>(url);
-		//}
-
-		//[HttpPost]
-		//public async Task<ActionResult<UrlDto>> PostUrl (UrlDto urlDto)
-		//{
-		//	var url = _mapper.Map<Url>(urlDto);
-		//	var addedUrl = await _urlRepository.AddUrl(url);
-
-		//	return CreatedAtAction(nameof(GetUrl), new { id = addedUrl.Id }, _mapper.Map<UrlDto>(addedUrl));
-		//}
-
-		//[HttpDelete("{id}")]
-		//public async Task<IActionResult> DeleteUrl (int id)
-		//{
-		//	var url = await _urlRepository.GetUrlById(id);
-
-		//	if (url == null) { return NotFound(); }
-
-		//	var deleted = await _urlRepository.DeleteUrl(id);
-		//	if (deleted)
-		//	{
-		//		return NoContent();
-		//	}
-		//	else
-		//	{
-		//		return StatusCode(500);
-		//	}
-		//}
-
-		public IActionResult Index()
+		private readonly AppDbContext _context;
+		public UrlController(AppDbContext context)
 		{
-			//Data is from DB
-			var url1 = new Url()
+			_context = context;
+		}
+
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Urls.ToListAsync());
+        }
+
+        // Get: Url/Details
+        public async Task<IActionResult> Details (int? id)
+		{
+			if (id == null)
 			{
-			Id = 1,
-			OriginalLink = "https://original.com",
-			ShortLink = "shrtly",
+				return NotFound();
+			}
+			var url = await _context.Urls.FirstOrDefaultAsync(url => url.Id == id);
+			if (url == null) { return NotFound(); }
+			return View(url);
+		}
 
-			};
-
-			var url2 = new Url()
-			{
-				Id = 2,
-				OriginalLink = "https://lessoriginal.com",
-				ShortLink = "shrtly2",
-
-			};
-
-			var url3 = new Url()
-			{
-				Id = 3,
-				OriginalLink = "https://evenlessoriginal.com",
-				ShortLink = "shrtly3",
-
-			};
-
-			var url4 = new Url()
-			{
-				Id = 4,
-				OriginalLink = "https://devoidoforiginality.com",
-				ShortLink = "shrtly4",
-
-			};
-
-			var allData = new List<Url>();
-			allData.Add(url1);
-			allData.Add(url2);
-			allData.Add(url3);
-			allData.Add(url4);
-
-			ViewData["AllUrls"] = allData;
-
+		public IActionResult Create()
+		{
+			ViewData["ShortenedUrl"] = RandomString(8);
 			return View();
 		}
 
+		//Post: Url/Create
+		[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,OriginalLink,ShortLink")] Url url)
+		{
+			if (ModelState.IsValid)
+			{
+				_context.Add(url);
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Index));
+			}
+			return View();
+		}
 
-		//public IActionResult Copy(int id)
-		//{
-		//	return View();
-		//}
+        // Get: Url/Remove/5
+        public async Task<IActionResult> Remove(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var url = await _context.Urls
+                .FirstOrDefaultAsync(url => url.Id == id);
+            if (url == null)
+            {
+                return NotFound();
+            }
+
+            return View(url);
+        }
+
+		// Post: Url/Remove/5
+		[HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveConfirmed(int id)
+        {
+            var url = await _context.Urls.FindAsync(id);
+            if (url != null)
+            {
+                _context.Urls.Remove(url);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool UrlExists(int id)
+        {
+            return _context.Urls.Any(url => url.Id == id);
+        }
 
 
-		//public IActionResult Remove(int id)
-		//{
-		//	return View();
-		//}
+		private static Random random = new Random();
+		public static string RandomString(int length)
+		{
+			const string chars = "qwertyuiopasdfghjklzxcvbnmABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			return new string(Enumerable.Repeat(chars, length)
+				.Select(s => s[random.Next(s.Length)]).ToArray());
+		}
+
 	}
 }

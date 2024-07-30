@@ -1,56 +1,53 @@
-﻿@model List<Url>;
+﻿@model IEnumerable<Url>
 @{
 	ViewData["Title"] = "All short links";
-	var allUrls = ViewData["AllUrls"] as List<Url>;
 }
 
 <div class="container">
 	<a class="btn btn-outline-success"
-	   asp-controller="Home"
-	   asp-action="Index">
-	   Add new
-	   
+	   asp-action="Create">
+	   Add new  
 	</a>
 </div>
+
 
 <div class="container">
 	<table class="table table-striped">
 		<thead>
 			<tr>
-			   <th scope="col">#</th>
-			   <th scope="col">Original link</th>
-		       <th scope="col">Shortened Link</th>
-			   <th scope="col">Copy Shortened Link</th>
-			   <th scope="col">Delete Shortened Link</th>
+			   <th scope="col">@Html.DisplayNameFor(model => model.Id) </th>
+				<th scope="col">@Html.DisplayNameFor(model => model.OriginalLink)</th>
+				<th scope="col">@Html.DisplayNameFor(model => model.ShortLink)</th>
+			   <th scope="col">Copy Short Link</th>
+			   <th scope="col">Delete Link</th>
 			</tr>
 		
 		</thead>
 		<tbody>
 			@{
-				if (allUrls != null)
+				foreach (var url in Model)
 				{
-					foreach (var url in allUrls)
-					{
-						<tr>
-							<td>@url.Id</td>
-							<td>@url.OriginalLink</td>
-							<td>@url.ShortLink</td>
-							<td>
-								<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Copy"
-								   asp-route-id="@url.Id">
-									Copy
-								</a>
-							</td>
-							<td>
-								<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove"
-								   asp-route-id="@url.Id">
-									Remove
-								</a>
-							</td>
-						</tr>
-					}
+					<tr>
+						<td>@Html.DisplayFor(modelItem => url.Id)</td>
+						<td>@Html.DisplayFor(modelItem => url.OriginalLink)</td>
+						<td>
+							<a href="@url.OriginalLink" class="btn btn-primary">
+								@Html.DisplayFor(modelItem => url.ShortLink)
+							</a>
+						<td>
+							<a class="btn btn-outline-success" asp-controller="Url" asp-action="Copy"
+								asp-route-id="@url.Id">
+								Copy
+							</a>
+						</td>
+						<td>
+							<a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove"
+								asp-route-id="@url.Id">
+								Remove
+							</a>
+						</td>
+					</tr>
 				}
-
 			}
 		</tbody>
 	</table>

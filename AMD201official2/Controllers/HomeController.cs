@@ -1,4 +1,4 @@
-using AMD201official2.Data.Models;
+using AMD201official2.Data;
 using AMD201official2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
