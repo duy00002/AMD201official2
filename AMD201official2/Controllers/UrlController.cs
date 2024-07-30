@@ -140,7 +140,7 @@ namespace AMD201official2.Controllers
 		}
 
         //Get: Url/Expand
-        [HttpGet]
+        [HttpGet,ActionName("Expand")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Expand(string ShortLink)
         {
