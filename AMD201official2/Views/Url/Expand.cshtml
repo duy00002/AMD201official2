@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Expand URL";
     var shorturl = ViewData["ShortenedUrl"];
+    var message = TempData["Message"] as string;
 }
 
 <h2>Expand URL</h2>
@@ -9,8 +10,21 @@
 <form method="get">
     <div class="form-group">
         <label for="ShortLink">Enter Shortened URL:</label>
+
+        <br /><br />
+
         <input type="text" class="form-control" id="ShortLink" name="ShortLink" />
+
+
+        @if (!string.IsNullOrEmpty(message))
+        {
+            <div class="alert alert-danger" role="alert">
+                @message
+            </div>
+        }
     </div>
+
+    <br />
 
     <div class="form-group">
         <input asp-for="ShortLink" class="form-control" value="@shorturl" type="hidden" />
