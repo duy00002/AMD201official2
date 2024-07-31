@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AMD201official2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240730072449_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240731034359_initDb")]
+    partial class initDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
