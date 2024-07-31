@@ -38,7 +38,6 @@ namespace AMD201official2.Controllers
 			return View(url);
 		}
 
-        // hi
 		public IActionResult Create()
 		{
 			ViewData["ShortenedUrl"] = RandomString(8);
@@ -139,25 +138,25 @@ namespace AMD201official2.Controllers
 				.Select(s => s[random.Next(s.Length)]).ToArray());
 		}
 
-        // Get: Url/Expand
+        //Get: Url/Expand
         [HttpGet, ActionName("Expand")]
         public async Task<IActionResult> Expand(string ShortLink)
         {
             if (string.IsNullOrEmpty(ShortLink))
             {
-                ModelState.AddModelError("", "Link can not be empty.");
-                return View();
+                ViewData["ErrorMessage"] = "Link cannot be empty.";
+                return View(); // Return the view with the error message
             }
 
-            var url = await _context.Urls.FirstOrDefaultAsync(url => url.ShortLink == ShortLink);
+            var url = await _context.Urls.FirstOrDefaultAsync(u => u.ShortLink == ShortLink);
 
             if (url == null)
             {
-                ModelState.AddModelError("", "Wrong URL, type again.");
-                return View();
+                ViewData["ErrorMessage"] = "Wrong URL, type again.";
+                return View(); // Return the view with the error message
             }
 
-            // Display the original URL in the view
+            // Return the view with the URL model if found
             return View(url);
         }
 

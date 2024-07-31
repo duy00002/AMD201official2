@@ -1,6 +1,7 @@
 ﻿@model Url
 @{
     ViewData["Title"] = "Expand URL";
+    var shorturl = ViewData["ShortenedUrl"];
 }
 
 <h2>Expand URL</h2>
@@ -9,12 +10,14 @@
     <div class="form-group">
         <label for="ShortLink">Enter Shortened URL:</label>
         <input type="text" class="form-control" id="ShortLink" name="ShortLink" />
-        <span for="ShortLink" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="ShortLink" class="form-control" value="@shorturl" type="hidden" />
     </div>
 
     <button type="submit" class="btn btn-primary">Expand</button>
 </form>
-
 
 @if (Model != null)
 {
@@ -23,5 +26,17 @@
         <p>@Model.OriginalLink</p>
     </div>
 }
+
+@section Scripts {
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = '@ViewData["ErrorMessage"]';
+            if (errorMessage) {
+                alert(errorMessage);
+            }
+        });
+    </script>
+}
+
 
 
