@@ -9,20 +9,12 @@
     <div class="form-group">
         <label for="ShortLink">Enter Shortened URL:</label>
         <input type="text" class="form-control" id="ShortLink" name="ShortLink" />
+        <span for="ShortLink" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Expand</button>
 </form>
 
-@if (ViewData.ModelState[""].Errors.Any())
-{
-    <div class="alert alert-danger mt-3">
-        @foreach (var error in ViewData.ModelState[""].Errors)
-        {
-            <p>@error.ErrorMessage</p>
-        }
-    </div>
-}
 
 @if (Model != null)
 {
