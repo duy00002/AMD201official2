@@ -139,13 +139,13 @@ namespace AMD201official2.Controllers
 				.Select(s => s[random.Next(s.Length)]).ToArray());
 		}
 
-        //Get: Url/Expand
-        [HttpGet,ActionName("Expand")]
+        // Get: Url/Expand
+        [HttpGet, ActionName("Expand")]
         public async Task<IActionResult> Expand(string ShortLink)
         {
             if (string.IsNullOrEmpty(ShortLink))
             {
-                ModelState.AddModelError("", "Short link is required.");
+                ModelState.AddModelError("", "Link can not be empty.");
                 return View();
             }
 
@@ -153,13 +153,14 @@ namespace AMD201official2.Controllers
 
             if (url == null)
             {
-                ModelState.AddModelError("", "Shortened URL not found.");
+                ModelState.AddModelError("", "Wrong URL, type again.");
                 return View();
             }
 
             // Display the original URL in the view
             return View(url);
         }
+
 
     }
 }
