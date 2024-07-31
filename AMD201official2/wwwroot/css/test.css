@@ -1,3 +1,100 @@
 ﻿body {
-    background-color: aqua
+    background-color: #fe775c;
+}
+
+.table-container {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.custom-header {
+    background-color: white;
+    color: #333;
+}
+
+.custom-header-container {
+    border: 2px solid #fe5c5c;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+    .table thead th {
+        border-bottom: 2px solid #fe5c5c;
+        background-color: #fe7f5c; /* Ensure the header has a white background */
+        color: #333; /* Optional: ensure text color is set */
+    }
+
+    .table tbody tr {
+        background-color: white; /* Set the background color of rows */
+    }
+
+    .table tbody td {
+        border-top: 1px solid #fe5c5c; /* Optional: add a border to separate rows */
+    }
+
+
+.btn-create {
+    background-color: black; /* Set background color to black */
+    color: white; /* Set text color to white */
+    border: 2px solid black; /* Set border color to black with 2px width */
+    padding: 1px 10px; /* Optional: add some padding for better appearance */
+    border-radius: 7px; /* Optional: add rounded corners */
+    text-align: center; /* Center the text */
+    font-size: 16px; /* Optional: set font size */
+    text-decoration: none; /* Remove underline from links if used */
+}
+
+    .btn-create:hover {
+        background-color: green; /* Optional: slightly lighter black on hover */
+        border-color: #333; /* Optional: change border color on hover */
+        text-decoration-color: white;
+    }
+
+
+.button-box {
+    background-color: #523e6b; /* Set background color for the box */
+    padding: 5px; /* Add padding around the button */
+    border-radius: 8px; /* Optional: add rounded corners to the box */
+    display: inline-block; /* Ensure the box wraps around the button */
+}
+
+    .button-box:hover {
+        background-color: green; 
+        border-color: #333; 
+        text-decoration-color: white;
+    }
+
+
+/* Style for the navbar */
+.navbar {
+    background-color: #523e6b !important; /* Set background color */
+}
+
+    .navbar .navbar-nav .nav-link {
+        color: white !important; /* Set text color to white */
+    }
+
+    .navbar .navbar-brand {
+        color: white !important; /* Set text color of the brand link to white */
+    }
+
+.navbar-toggler-icon {
+    background-color: white; /* Ensure the toggler icon is visible if needed */
+}
+
+/* Optional: Add hover effect for nav links */
+.navbar .navbar-nav .nav-link:hover {
+    color: #d1c8e4 !important; /* Slightly lighter color on hover */
+}
+
+/* Style for the info box */
+.info-box {
+    background-color: white; /* Set background color to white */
+    padding: 20px; /* Add padding inside the box */
+    border-radius: 8px; /* Optional: add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add subtle shadow */
 }

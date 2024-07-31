@@ -40,6 +40,8 @@ namespace AMD201official2
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
+            // add line
+            app.UseStaticFiles();
 
             app.Run();
         }
