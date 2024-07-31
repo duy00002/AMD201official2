@@ -146,7 +146,7 @@ namespace AMD201official2.Controllers
             {
                 // Display message box using a tempdata message
                 TempData["Message"] = "Link cannot be empty.";
-                return View(); // Return the view with the error message
+                return View(); 
             }
 
             var url = await _context.Urls.FirstOrDefaultAsync(u => u.ShortLink == ShortLink);
