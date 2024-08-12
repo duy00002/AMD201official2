@@ -149,7 +149,7 @@ namespace AMD201official2.Controllers
                 return View(); 
             }
 
-            var url = await _context.Urls.FirstOrDefaultAsync(u => u.ShortLink == ShortLink);
+            var url = await _context.Urls.FirstOrDefaultAsync(Url => Url.ShortLink == ShortLink);
 
             if (url == null)
             {
