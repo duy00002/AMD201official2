@@ -6,6 +6,16 @@
 <div class="container mt-4">
     <a class="btn btn-create" asp-action="Create">Add new</a>
 </div>
+<div class="container mt-4">
+    @if (Model.Count() == 1)
+    {
+        <p>There is @Model.Count() shortened link in total</p>
+    }
+    else
+    {
+        <p>There are @Model.Count() shortened links in total</p>
+    }
+</div>
 
 <div class="container custom-header-container">
     <table class="table table-striped">
