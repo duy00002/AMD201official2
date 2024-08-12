@@ -47,7 +47,7 @@
 
 <script type="text/javascript">
     function copyLink(shortLink) {
-        const link = `http://localhost:7260/Url/IDI/${shortLink}`;
+        const link = `https://localhost:7260/Url/IDI/${shortLink}`;
         navigator.clipboard.writeText(link).then(() => {
             alert(`Copied the link: ${link}`);
         }).catch(err => {
