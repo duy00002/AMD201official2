@@ -6,6 +6,7 @@ using AspNetCoreRateLimit;
 using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using AMD201official2.Models;
+using AMD201official2.Repository;
 namespace AMD201official2
 {
     public class Program
@@ -20,6 +21,7 @@ namespace AMD201official2
 			builder.Services.AddDbContext<AppDbContext>(options =>
 				options.UseSqlServer(connectionString));
 			builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddTransient<IUrlRepository, UrlRepository>();
 
 			builder.Services.AddControllers();
 

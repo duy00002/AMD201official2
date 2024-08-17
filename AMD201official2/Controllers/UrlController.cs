@@ -111,23 +111,23 @@ namespace AMD201official2.Controllers
         }
 
 		// Post: Url/IDI/'short-link' Remain Unused
-		[HttpPost, ActionName("IDI")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> IDIConfirmed(string id)
-        {
-            var url = await _context.Urls
-                .FirstOrDefaultAsync(url => url.ShortLink == id);
-            if (url == null)
-            {
-                return NotFound();
-            }
-            return Redirect(url.OriginalLink);
-        }
+		//[HttpPost, ActionName("IDI")]
+  //      [ValidateAntiForgeryToken]
+  //      public async Task<IActionResult> IDIConfirmed(string id)
+  //      {
+  //          var url = await _context.Urls
+  //              .FirstOrDefaultAsync(url => url.ShortLink == id);
+  //          if (url == null)
+  //          {
+  //              return NotFound();
+  //          }
+  //          return Redirect(url.OriginalLink);
+  //      }
 
-        private bool UrlExists(int id)
-        {
-            return _context.Urls.Any(url => url.Id == id);
-        }
+  //      private bool UrlExists(int id)
+  //      {
+  //          return _context.Urls.Any(url => url.Id == id);
+  //      }
 
 
 		private static Random random = new Random();
